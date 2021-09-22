@@ -1,6 +1,5 @@
 import {basicVars, cards, createCards, createCanvases, choosenCards, attachMapsToCards} from './modules/initCards.js';
 
-
 function handleFlipBack(){
     if (choosenCards.cardsShown.length >= 2) {
         while (choosenCards.cardsShown) {

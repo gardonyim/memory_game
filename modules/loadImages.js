@@ -1,8 +1,6 @@
-let urlList = [];
-for (let i = 0; i < 8; i++) {
-    urlList.push('img/map_samples/map' + i + '.png')
-};
-urlList.push('img/backSide.png');
+import {getData} from './dataHandler.js';
+import basicVars from './loadData.js';
+
 
 function getImage(url){
     return new Promise(function(resolve, reject){
@@ -17,5 +15,15 @@ function getImage(url){
     })
 };
 
-const maps = Promise.all(urlList.map(url => getImage(url)));
+async function loadMaps (path) {
+    let mapList = await getData('http://localhost:3000/map_samples');
+    let urlList = [];
+    for (let item of mapList) {
+        urlList.push(path + item);
+    };
+    urlList.push(basicVars.backsideImage);
+    return Promise.all(urlList.map(url => getImage(url)));
+};
+
+const maps = loadMaps (basicVars.mapSamplesRoute);
 export default await maps

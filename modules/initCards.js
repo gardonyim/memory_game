@@ -1,6 +1,17 @@
 import maps from './loadImages.js';
-import {basicVars, createCanvases} from './setupGame.js';
+import basicVars from './loadData.js';
 
+
+function createCanvases() {
+    let canvasContainer = document.querySelector('#canvasContainer');
+    for (let i = 0; i < basicVars.numberOfCards; i++) {
+        let canvas = document.createElement('canvas');
+        canvas.setAttribute('id', 'card' + i);
+        canvas.setAttribute('width', basicVars.canvasSize);
+        canvas.setAttribute('height', basicVars.canvasSize);
+        canvasContainer.appendChild(canvas);
+    }
+};
 
 const card = {
     ctx: null,
