@@ -1,23 +1,24 @@
 
-// function getData(url) {
-//     let fetchOptions = {
-//         method: 'GET',
-//         credentials: 'same-origin'
-//     };
-//     fetch(url, fetchOptions)
-//         .then(response => response.json())
-//         // .then(json_response => callback(json_response))
-//         .then(json_response => {return json_response})
-// };
-
 async function getData(url) {
-    let fetchOptions = {
-        method: 'GET',
-        credentials: 'same-origin'
+    // let fetchOptions = {
+    //     method: 'GET',
+    //     credentials: 'same-origin'
+    // };
+    // return await fetch(url, fetchOptions).then(response => response.json());
+
+    // Mock API response:
+    if (url === 'http://localhost:3000/image_data') {
+        return Promise.resolve({
+            imageSize: 200,
+            mapSamplesRoute: "img/map_samples/",
+            backsideImage: "img/backSide.png"
+        })
     };
-    return await fetch(url, fetchOptions).then(response => response.json());
-    // let json_response = await response.json(result);
-    // return result;
+    if (url === 'http://localhost:3000/map_samples') {
+        return Promise.resolve([
+            "map0.png", "map1.png", "map2.png", "map3.png", "map4.png", "map5.png", "map6.png", "map7.png"
+        ])
+    }
 };
 
 export {getData}
