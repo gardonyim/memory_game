@@ -19,13 +19,16 @@ function hit(event) {
     let hitX = (event.offsetX - basicVars.canvasSize / 2) * Math.cos(rotationAngle) - (event.offsetY - basicVars.canvasSize / 2) * Math.sin(rotationAngle) + basicVars.canvasSize / 2;
     let hitY = (event.offsetX - basicVars.canvasSize / 2) * Math.sin(rotationAngle) + (event.offsetY - basicVars.canvasSize / 2) * Math.cos(rotationAngle) + basicVars.canvasSize / 2;
     
-    if (hitX >= basicVars.imagePos && hitX <= (basicVars.canvasSize - basicVars.imagePos) && hitY >= basicVars.imagePos && hitY <= (basicVars.canvasSize - basicVars.imagePos) && !targetCard.mapOn && choosenCards.cardsShown.length < 2) {
+    let onCard = hitX >= basicVars.imagePos && hitX <= (basicVars.canvasSize - basicVars.imagePos) && hitY >= basicVars.imagePos && hitY <= (basicVars.canvasSize - basicVars.imagePos);
+    if (onCard && !targetCard.mapOn && choosenCards.cardsShown.length < 2) {
         targetCard.flipCard();
         choosenCards.register(targetCard);
+    } else if (onCard && targetCard.mapOn) {
+        handleFlipBack();
     };
 };
 
-function game() {
+function putCardsOnBoard() {
     for (let cardInstance of cards) {
         cardInstance.rotate();
         cardInstance.drawCard(cardInstance.backside);
@@ -46,4 +49,4 @@ createCanvases();
 createCards();
 attachEventListeners();
 attachMapsToCards();
-game();
+putCardsOnBoard();
